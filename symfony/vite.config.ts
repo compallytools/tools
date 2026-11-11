@@ -12,12 +12,12 @@ export default defineConfig({
     // Twig : reprise_entry_script_tags('<nom>') / reprise_entry_link_tags('<nom>')
     input: {
         app: './src/Common/Resources/assets/app.ts',
-        contrast_grid: './src/ContrastGrid/Resources/assets/contrast-grid.ts',
+        colorally: './src/Colorally/Resources/assets/colorally.ts',
     },
     resolve: {
         alias: {
             '@common': fromRoot('./src/Common/Resources/assets'),
-            '@contrast-grid': fromRoot('./src/ContrastGrid/Resources/assets'),
+            '@colorally': fromRoot('./src/Colorally/Resources/assets'),
             '@router': fromRoot('./assets/router.ts'),
         },
     },

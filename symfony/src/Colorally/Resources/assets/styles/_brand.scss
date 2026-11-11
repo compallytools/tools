@@ -1,0 +1,22 @@
+@use '@common/styles/variables' as *;
+
+.colorally-brand {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem $spacing;
+    align-items: baseline;
+
+    &__logo {
+        font-family: $font-body;
+        font-size: 2rem;
+        font-weight: 700;
+        line-height: 1;
+        color: $color-accent;
+        text-decoration: none;
+    }
+
+    &__tagline {
+        font-size: 0.875rem;
+        color: $color-muted;
+    }
+}

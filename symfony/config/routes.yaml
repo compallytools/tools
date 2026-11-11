@@ -3,17 +3,11 @@
 # et préfixe de nom de route propres au module ; chaque module a son propre "/".
 # Lister les routes : task console -- debug:router
 
-contrast_grid:
-    resource: ../src/ContrastGrid/Controller/
+colorally:
+    resource: ../src/Colorally/Controller/
     type: attribute
-    host: '%contrast_grid.host%'
-    name_prefix: contrast_grid_
-
-demo:
-    resource: ../src/Demo/Controller/
-    type: attribute
-    host: '%demo.host%'
-    name_prefix: demo_
+    host: '%colorally.host%'
+    name_prefix: colorally_
 
 # Page d'accueil de dev (liste des modules), hors modules : host localhost, jamais en prod.
 when@dev: &dev_routes

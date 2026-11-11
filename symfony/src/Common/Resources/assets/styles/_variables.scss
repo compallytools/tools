@@ -41,9 +41,19 @@ $color-surface: $color-snow-white;
 $color-surface-alt: $color-cream;
 $color-border: color.change($color-midnight-blue, $alpha: 0.3);
 
+// --- Interface applicative (maquettes Colorally) : encre et neutres, distincts du bleu de marque ---
+$color-ink: #171744;
+$color-ink-muted: #555260;
+$color-ink-subtle: #656574;
+$color-accent-soft: #f0eeff;
+$color-divider: #e1ded9;
+
 // --- Typographie ---
 $font-heading: 'Momentz Corfmat', sans-serif;
 $font-body: 'Fredoka', sans-serif;
+
+// Police de l'interface des outils : Fredoka pour l'instant (les maquettes utilisent un sans-serif neutre type Inter, à embarquer plus tard).
+$font-ui: $font-body;
 $font-decorative: 'Kanopi Brazil Corfmat', sans-serif;
 $font-size-h1: 2rem;
 $font-size-h2: 1.75rem;
@@ -55,3 +65,9 @@ $line-height-body: 1.5;
 $radius: 8px;
 $radius-pill: 30px;
 $spacing: 1rem;
+
+// --- Mise en page ---
+$breakpoint-lg: 64rem;
+$layout-max-width: 100rem;
+$layout-gutter: 1rem;
+$layout-gutter-lg: 2.5rem;

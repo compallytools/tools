@@ -1,0 +1,129 @@
+@use '@common/styles/variables' as *;
+
+.palette-panel {
+    padding: 1.5rem;
+    background: $color-surface;
+    border-radius: 1rem;
+
+    &__header {
+        display: flex;
+        gap: 0.75rem;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__title {
+        margin: 0;
+        font-family: $font-ui;
+        font-size: 1.375rem;
+        font-weight: 600;
+        color: $color-ink;
+    }
+
+    &__count {
+        min-width: 2.25rem;
+        padding: 0.25rem 0.75rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: $color-accent;
+        text-align: center;
+        background: $color-accent-soft;
+        border-radius: $radius-pill;
+    }
+
+    &__summary {
+        margin: 0.5rem 0 1rem;
+        font-size: 0.875rem;
+        color: $color-ink-subtle;
+    }
+
+    &__actions {
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid $color-divider;
+    }
+
+    &__link {
+        padding: 0;
+        font: inherit;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: $color-accent;
+        cursor: pointer;
+        background: none;
+        border: 0;
+
+        &--muted {
+            font-weight: 400;
+            color: $color-ink-subtle;
+        }
+
+        &--small {
+            font-size: 0.8125rem;
+            font-weight: 500;
+        }
+
+        &:disabled {
+            cursor: default;
+        }
+    }
+
+    &__list {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    &__item {
+        display: flex;
+        gap: 0.75rem;
+        align-items: center;
+        padding-block: 0.5rem;
+    }
+
+    &__swatch {
+        flex: none;
+        width: 2.25rem;
+        height: 2.25rem;
+        background: var(--swatch);
+        border: 1px solid $color-divider;
+        border-radius: 0.5rem;
+    }
+
+    &__identity {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        min-width: 0;
+    }
+
+    &__name {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 0.9375rem;
+        line-height: 1.3;
+        white-space: nowrap;
+        color: $color-ink;
+    }
+
+    &__hex {
+        font-size: 0.8125rem;
+        line-height: 1.3;
+        color: $color-ink-subtle;
+    }
+
+    &__add {
+        width: 100%;
+        padding: 0.75rem;
+        margin-top: 1rem;
+        font: inherit;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: $color-accent;
+        cursor: default;
+        background: $color-accent-soft;
+        border: 0;
+        border-radius: $radius;
+    }
+}

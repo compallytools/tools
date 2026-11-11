@@ -13,12 +13,15 @@
         "lint:style:fix": "stylelint \"src/**/*.{scss,vue}\" --fix",
         "format": "prettier --write \"src/**/Resources/assets/**/*.{ts,vue,scss}\" \"assets/**/*.{ts,json}\" \"*.{ts,js,json}\"",
         "format:check": "prettier --check \"src/**/Resources/assets/**/*.{ts,vue,scss}\" \"assets/**/*.{ts,json}\" \"*.{ts,js,json}\"",
-        "typecheck": "vue-tsc --noEmit"
+        "typecheck": "vue-tsc --noEmit",
+        "test": "vitest run",
+        "test:watch": "vitest"
     },
     "dependencies": {
         "@hotwired/stimulus": "^3.2.2",
         "@symfony/ux-router": "file:vendor/symfony/ux-router/assets",
         "@symfony/ux-vue": "file:vendor/symfony/ux-vue/assets",
+        "pinia": "^4.1.0",
         "vue": "^3.5.44"
     },
     "devDependencies": {
@@ -26,10 +29,12 @@
         "@symfony/reprise": "^1.3.0",
         "@types/node": "^26.6.6",
         "@vitejs/plugin-vue": "^6.0.10",
+        "@vue/test-utils": "^2.5.1",
         "eslint": "^10.14.0",
         "eslint-config-prettier": "^10.1.8",
         "eslint-plugin-vue": "^10.12.0",
         "globals": "^17.14.0",
+        "jsdom": "^31.0.0",
         "postcss-html": "^2.0.0",
         "prettier": "^3.9.10",
         "sass": "^1.107.1",
@@ -41,6 +46,7 @@
         "typescript": "^6.0.3",
         "typescript-eslint": "^8.72.1",
         "vite": "^8.3.5",
+        "vitest": "^5.1.0",
         "vue-eslint-parser": "^10.4.1",
         "vue-tsc": "^3.3.14"
     }

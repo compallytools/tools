@@ -7,8 +7,7 @@ Le code Symfony (`symfony/`) est découpé en **modules** dans `src/<Module>/`. 
 | Module | Rôle |
 |---|---|
 | `Common` | Layout, composants partagés, entrée JS principale (seule route : la page de dev `localhost` listant les modules, env `dev` uniquement) |
-| `Demo` | Module de démonstration (host `demo.localhost`) |
-| `ContrastGrid` | Outil « Contrast Grid » |
+| `Colorally` | Module Colorally (host `colorally.localhost`) |
 
 ```
 src/<Module>/
@@ -32,13 +31,13 @@ src/<Module>/
 |---|---|---|
 | Routes | host `<MODULE_SNAKE_UPPER>_HOST` (variable d'env, un `/` propre par module), nom `<module_snake>_…` | `config/routes.yaml` |
 | Doctrine | Entités `App\<Module>\Entity`, migrations globales `migrations/` | `config/packages/doctrine.yaml` |
-| Twig | `@<Module>/chemin.html.twig`, layout `@Common/base.html.twig` | `config/packages/twig.yaml` |
-| Twig Components | `<twig:Card>` (Common), `<twig:ContrastGrid:Nom>` (autres modules) ; anonymes dans `@Common/components/` | `config/packages/twig_component.yaml` |
+| Twig | `@<Module>/chemin.html.twig`, layout `@Common/base.html.twig` (header global ; le module surcharge les blocs `brand` (logo, baseline) et `content`) | `config/packages/twig.yaml` |
+| Twig Components | `<twig:Card>` (Common), `<twig:Colorally:Nom>` (autres modules) ; anonymes dans `@Common/components/` | `config/packages/twig_component.yaml` |
 | Vue (Symfony UX Vue) | `vue_component('<Module>/<Nom>', props)` ; chargement lazy, un chunk par composant | `src/Common/Resources/assets/vue/registry.ts` |
 | API (API Platform) | `/api/<module-kebab>/…`, opérations nommées `<module_snake>_api_<action>` | `config/packages/api_platform.yaml` |
 | Routes JS (UX Router) | Routes `<module>_api_*` exposées ; `import { path } from '@router'` (typé) | `config/packages/ux_router.yaml` |
 | Assets | Une entrée Vite par module ; `reprise_entry_script_tags('<entrée>')` | `vite.config.ts` |
-| Alias TS/SCSS | `@common/…`, `@contrast-grid/…`, `@router` | `vite.config.ts` + `tsconfig.json` |
+| Alias TS/SCSS | `@common/…`, `@colorally/…`, `@router` | `vite.config.ts` + `tsconfig.json` |
 
 ## Assets : Symfony Reprise + Vite
 
@@ -75,8 +74,8 @@ L'API (`/api`) sert **uniquement le front de l'application**. Elle est authentif
 - Ressources :
     - DTO + provider/processor dans `src/<Module>/ApiResource` et `src/<Module>/State`
     - ou entités Doctrine annotées `#[ApiResource]` dans `src/<Module>/Entity`
-- Nommer chaque opération `<module>_api_<action>` (ex. `new Get(uriTemplate: '/contrast-grid/ping', name: 'contrast_grid_api_ping')`) pour qu'UX Router l'expose au JS.
-- Front : `apiFetch(path('contrast_grid_api_ping'))` (`src/Common/Resources/assets/api/client.ts`). Il envoie JSON-LD par défaut (surchargeable via `headers`, sans effet sur les corps non JSON comme `FormData`) et le cookie de session, et lève une `ApiError` en cas d'erreur.
+- Nommer chaque opération `<module>_api_<action>` (ex. `new Get(uriTemplate: '/colorally/ping', name: 'colorally_api_ping')`) pour qu'UX Router l'expose au JS.
+- Front : `apiFetch(path('colorally_api_ping'))` (`src/Common/Resources/assets/api/client.ts`). Il envoie JSON-LD par défaut (surchargeable via `headers`, sans effet sur les corps non JSON comme `FormData`) et le cookie de session, et lève une `ApiError` en cas d'erreur.
 - Documentation OpenAPI : <http://localhost/api/docs> en dev, désactivée en prod.
 
 ## Créer un module
@@ -90,7 +89,7 @@ Le plus simple : le skill `/add-module <NomModule>` (`.claude/skills/add-module/
 5. `config/packages/twig.yaml` : path `src/<Module>/Resources/templates: <Module>`.
 6. `config/packages/twig_component.yaml` : `App\<Module>\Twig\Components\` avec `name_prefix`. *(optionnel : composants Twig PHP)*
 7. `vite.config.ts` (entrée + alias) et `tsconfig.json` (alias), `Resources/assets/<module-kebab>.ts`, et dans le template les blocs `stylesheets` / `javascripts` avec `reprise_entry_*_tags('<module_snake>')`.
-8. Lien dans la navigation (`base.html.twig`), assertion du lien dans `tests/Common/Controller/DevControllerTest.php`, lignes dans `README.md` et dans le tableau des modules ci-dessus.
+8. Assertion du lien dans `tests/Common/Controller/DevControllerTest.php`, lignes dans `README.md` et dans le tableau des modules ci-dessus.
 9. `tests/<Module>/` pour les tests.
 
 Les ressources API Platform d'un module (`App\<Module>\…`) héritent implicitement du host du module (`ModuleHostResourceMetadataCollectionFactory`) : l'API n'est servie que sur le host du module.

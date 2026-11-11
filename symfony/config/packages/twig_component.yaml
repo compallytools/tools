@@ -4,6 +4,3 @@ twig_component:
     # Composants PHP : un namespace par module
     defaults:
         App\Common\Twig\Components\: '@Common/components/'
-        App\ContrastGrid\Twig\Components\:
-            template_directory: '@ContrastGrid/components/'
-            name_prefix: ContrastGrid

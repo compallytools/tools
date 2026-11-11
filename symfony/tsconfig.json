@@ -17,7 +17,7 @@
         "jsx": "preserve",
         "paths": {
             "@common/*": ["./src/Common/Resources/assets/*"],
-            "@contrast-grid/*": ["./src/ContrastGrid/Resources/assets/*"],
+            "@colorally/*": ["./src/Colorally/Resources/assets/*"],
             "@router": ["./assets/router.ts"]
         }
     },

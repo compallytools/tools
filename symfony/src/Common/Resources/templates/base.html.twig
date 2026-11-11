@@ -14,12 +14,16 @@
         {% endblock %}
     </head>
     <body>
-        <nav class="main-nav">
-            <a href="{{ path('contrast_grid_index') }}">Contrast Grid</a>
-            <a href="{{ path('demo_index') }}">Demo</a>
-        </nav>
-        <main class="container">
-            {% block body %}{% endblock %}
+        <header class="site-header">
+            <div class="site-header__inner layout-inner">
+                <div class="site-header__brand">
+                    {# Marque du module (logo, baseline) : surchargée par chaque module. #}
+                    {% block brand %}<span>Tools</span>{% endblock %}
+                </div>
+            </div>
+        </header>
+        <main>
+            {% block content %}{% endblock %}
         </main>
     </body>
 </html>

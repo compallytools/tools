@@ -4,8 +4,8 @@
 
 - L'app tourne dans le container `php` (FrankenPHP, PHP 8.4, `/app`). Ne jamais lancer `php`, `composer`, `bin/console` ou `npm` sur l'hôte : depuis la racine du dépôt, utiliser `task console -- <cmd>`, `task composer -- <cmd>`, `task npm -- <cmd>`.
 - `DATABASE_URL` est injectée par `compose.yaml` (PostgreSQL, service `database`) ; ne pas la coder en dur.
-- **Structure modulaire** : tout le code d'un module vit dans `src/<Module>/` (`Common`, `ContrastGrid`, …) : `Controller/`, `Entity/`, `Repository/`, `Twig/Components/`, `Resources/templates/` (namespace Twig `@<Module>`), `Resources/assets/` (TS, SCSS, `vue/controllers/*.vue`). Ne pas recréer `templates/`, `assets/app.*` ni `src/Controller/` à la racine. Si une recette Flex en crée, déplacer le contenu dans le module.
-- Routes : préfixe et nom par module (`config/routes.yaml`, ex. `contrast_grid_*`).
+- **Structure modulaire** : tout le code d'un module vit dans `src/<Module>/` (`Common`, `Colorally`, …) : `Controller/`, `Entity/`, `Repository/`, `Twig/Components/`, `Resources/templates/` (namespace Twig `@<Module>`), `Resources/assets/` (TS, SCSS, `vue/controllers/*.vue`). Ne pas recréer `templates/`, `assets/app.*` ni `src/Controller/` à la racine. Si une recette Flex en crée, déplacer le contenu dans le module.
+- Routes : préfixe et nom par module (`config/routes.yaml`, ex. `colorally_*`).
 - **API = API Platform**, authentifiée **uniquement par la session PHP** (firewall `main` stateful, `stateless: false`). Ne pas ajouter de JWT, d'OAuth, de CORS ni de firewall API stateless, et ne pas écrire de contrôleurs JSON à la main.
   - Ressources : `src/<Module>/ApiResource` (DTO) + `src/<Module>/State` (providers/processors), ou entités `#[ApiResource]`.
   - Opérations nommées `<module>_api_<action>`, URL `/api/<module-kebab>/…`. Elles sont exposées au JS par UX Router (`import { path } from '@router'`).
@@ -13,7 +13,8 @@
 - Vue : `vue_component('<Module>/<Nom>', props)`, en TypeScript (`<script setup lang="ts">`). Le registre est dans `src/Common/Resources/assets/vue/registry.ts`.
 - Assets : Symfony Reprise + Vite (`vite.config.ts`), avec une entrée par module. Pas de Webpack Encore ni d'AssetMapper. Modes : `task assets:dev` (serveur Vite + HMR, par défaut), `task assets:watch`, `task assets:build`. Ils sont exclusifs : après un watch ou un build, revenir avec `task assets:dev`.
 - Charte graphique (couleurs, fonts) : uniquement via `src/Common/Resources/assets/styles/_variables.scss` (variables SCSS, alias sémantiques `$color-text`…) ou les custom properties `--color-<nom>` (`_root.scss`). Pas de couleur en dur. Fonts dans `Resources/assets/fonts/`, déclarées dans `_fonts.scss`.
-- Tests dans `tests/<Module>/`. Vérifier avec `task quality`.
+- **Tailles de police : uniquement en `rem`/`em`, jamais en `px`** (respect du réglage de taille du navigateur). Vaut pour `font-size` et la propriété `font` (pas d'unité de viewport non plus : paliers via media queries) ; les `px` restent permis pour bordures et rayons fins.
+- Tests PHP dans `tests/<Module>/` ; tests front Vitest en `*.test.ts` à côté du code (`Resources/assets/`). État Vue partagé : Pinia. Vérifier avec `task quality`.
 - Ajouter un module : suivre `../doc/docs/dev/architecture.md` (« Créer un module »).
 - Règles globales : voir `../AGENTS.md`.
 

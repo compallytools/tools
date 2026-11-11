@@ -7,8 +7,6 @@ api_platform:
         paths:
             - '%kernel.project_dir%/src/Common/ApiResource'
             - '%kernel.project_dir%/src/Common/Entity'
-            - '%kernel.project_dir%/src/ContrastGrid/ApiResource'
-            - '%kernel.project_dir%/src/ContrastGrid/Entity'
 
     formats:
         jsonld: ['application/ld+json']

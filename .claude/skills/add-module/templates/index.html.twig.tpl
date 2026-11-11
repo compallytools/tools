@@ -12,10 +12,16 @@
     {{ reprise_entry_script_tags('__snake__') }}
 {% endblock %}
 
-{% block body %}
-    <twig:PageHeader title="__LABEL__" />
+{% block brand %}
+    <a href="{{ path('__snake___index') }}">__LABEL__</a>
+{% endblock %}
 
-    <div class="__kebab__">
-        <p>Module __MODULE__, servi sur {{ app.request.host }}.</p>
+{% block content %}
+    <div class="container">
+        <twig:PageHeader title="__LABEL__" />
+
+        <div class="__kebab__">
+            <p>Module __MODULE__, servi sur {{ app.request.host }}.</p>
+        </div>
     </div>
 {% endblock %}

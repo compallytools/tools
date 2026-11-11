@@ -14,7 +14,7 @@ final class DevControllerTest extends WebTestCase
         $client->request('GET', '/', server: ['HTTP_HOST' => 'localhost']);
 
         self::assertResponseIsSuccessful();
-        self::assertSelectorExists('a[href*="contrast-grid.localhost"]');
-        self::assertSelectorExists('a[href*="demo.localhost"]');
+        self::assertSelectorExists('header.site-header');
+        self::assertSelectorExists('a[href*="colorally.localhost"]');
     }
 }

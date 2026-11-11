@@ -15,7 +15,7 @@ use Twig\Loader\FilesystemLoader;
 
 /**
  * Le plugin Symfony de Psalm ne gère qu'un dossier racine de templates. Ce plugin enregistre
- * les namespaces Twig des modules (config/packages/twig.yaml, @Common, @Demo…) sur son loader.
+ * les namespaces Twig des modules (config/packages/twig.yaml, @Common, @Colorally…) sur son loader.
  */
 final class TwigModuleNamespacesPlugin implements PluginEntryPointInterface, AfterCodebasePopulatedInterface
 {

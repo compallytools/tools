@@ -2,7 +2,7 @@
  * Client HTTP pour l'API Platform de l'application.
  *
  * Authentification : uniquement la session PHP (cookie, même origine). Pas de token à gérer.
- * URLs : toujours via UX Router, ex. apiFetch(path('contrast_grid_api_ping')).
+ * URLs : toujours via UX Router, ex. apiFetch(path('colorally_api_ping')).
  */
 
 export class ApiError extends Error {

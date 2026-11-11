@@ -1,0 +1,33 @@
+{% extends '@Common/base.html.twig' %}
+
+{% block title %}Colorally · {{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ reprise_entry_link_tags('colorally') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ reprise_entry_script_tags('colorally') }}
+{% endblock %}
+
+{% block brand %}
+    <div class="colorally-brand">
+        <a class="colorally-brand__logo" href="{{ path('colorally_index') }}">colorally</a>
+        <span class="colorally-brand__tagline">Les couleurs, bien ensemble.</span>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="colorally">
+        <div class="colorally__inner layout-inner">
+            <div {{ vue_component('Colorally/App') }}>
+                <div class="colorally__skeleton" aria-hidden="true"></div>
+                <noscript>
+                    <p>Colorally a besoin de JavaScript pour analyser votre palette.</p>
+                </noscript>
+            </div>
+        </div>
+    </div>
+{% endblock %}

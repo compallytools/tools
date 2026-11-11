@@ -2,12 +2,14 @@
 
 {% block title %}Modules · {{ parent() }}{% endblock %}
 
-{% block body %}
-    <twig:PageHeader title="Modules" subtitle="Page visible uniquement en environnement dev." />
+{% block content %}
+    <div class="container">
+        <twig:PageHeader title="Modules" subtitle="Page visible uniquement en environnement dev." />
 
-    <ul>
-        {% for module in modules %}
-            <li><a href="{{ module.url }}">{{ module.name }}</a> — {{ module.host }}</li>
-        {% endfor %}
-    </ul>
+        <ul>
+            {% for module in modules %}
+                <li><a href="{{ module.url }}">{{ module.name }}</a> — {{ module.host }}</li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock %}

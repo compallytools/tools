@@ -5,7 +5,7 @@ import { type Component, defineAsyncComponent } from 'vue';
  *
  * Chaque fichier src/<Module>/Resources/assets/vue/controllers/<Chemin>.vue est exposé à Twig sous
  * le nom stable "<Module>/<Chemin>" :
- *   <div {{ vue_component('ContrastGrid/ContrastGrid', {...}) }}></div>
+ *   <div {{ vue_component('Colorally/Exemple', {...}) }}></div>
  *
  * On remplace registerVueControllerComponents() de @symfony/ux-vue, dont les noms dépendent du
  * préfixe commun des chemins (et changeraient donc à chaque ajout de module).

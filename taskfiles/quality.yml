@@ -3,7 +3,7 @@ version: '3'
 # Inclus depuis Taskfile.yml sous le namespace "quality" :
 #   task quality            → tout (PHP + JS + tests)
 #   task quality:php        → phpcs + phpstan + psalm
-#   task quality:js         → eslint + stylelint + prettier + typecheck
+#   task quality:js         → eslint + stylelint + prettier + typecheck + vitest
 #   task quality:fix        → corrections automatiques PHP + JS
 
 vars:
@@ -65,12 +65,13 @@ tasks:
 
   # --- JS / TS / Vue / SCSS ----------------------------------------------------
   js:
-    desc: Qualité front (eslint + stylelint + prettier + typecheck)
+    desc: Qualité front (eslint + stylelint + prettier + typecheck + vitest)
     cmds:
       - task: js:eslint
       - task: js:stylelint
       - task: js:prettier
       - task: js:typecheck
+      - task: js:vitest
 
   js:eslint:
     desc: ESLint (TS + Vue)
@@ -91,6 +92,11 @@ tasks:
     desc: Vérification des types TS/Vue (vue-tsc)
     cmds:
       - '{{.RUN_NODE_QA}} npm run -s typecheck'
+
+  js:vitest:
+    desc: Tests unitaires front (Vitest)
+    cmds:
+      - '{{.RUN_NODE_QA}} npm run -s test'
 
   js:fix:
     desc: Corrections automatiques front (eslint --fix, stylelint --fix, prettier --write)

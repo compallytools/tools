@@ -20,8 +20,7 @@ Une fois terminé :
 | Quoi | URL |
 |---|---|
 | Liste des modules (dev uniquement) | <http://localhost> |
-| Module Contrast Grid | <http://contrast-grid.localhost> |
-| Module Demo | <http://demo.localhost> |
+| Module Colorally | <http://colorally.localhost> |
 | Serveur Vite (assets, HMR) | <http://localhost:5173> |
 | Documentation | <http://localhost:8001> |
 

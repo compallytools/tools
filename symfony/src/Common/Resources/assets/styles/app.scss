@@ -9,6 +9,9 @@
 }
 
 body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     margin: 0;
     font-family: $font-body;
     font-size: $font-size-body;
@@ -44,11 +47,37 @@ a {
     color: $color-accent;
 }
 
-.main-nav {
+main {
     display: flex;
-    gap: $spacing;
-    padding: $spacing;
-    border-bottom: 1px solid $color-border;
+    flex: 1 0 auto;
+    flex-direction: column;
+}
+
+// Largeur et gouttières communes au header et au contenu des modules.
+.layout-inner {
+    width: 100%;
+    max-width: $layout-max-width;
+    margin: 0 auto;
+    padding-inline: $layout-gutter;
+
+    @media (min-width: $breakpoint-lg) {
+        padding-inline: $layout-gutter-lg;
+    }
+}
+
+// Header global : la marque (logo, baseline) est fournie par chaque module via le bloc Twig "brand".
+.site-header {
+    background: $color-surface;
+    border-bottom: 1px solid $color-divider;
+
+    &__inner {
+        padding-block: $spacing;
+    }
+
+    &__brand {
+        display: flex;
+        align-items: center;
+    }
 }
 
 .container {

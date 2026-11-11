@@ -4,7 +4,7 @@ ux_router:
     dump_typescript: true
 
     # Routes exposées au JS : les opérations API Platform des modules, nommées <module>_api_*
-    # (ex. new Get(name: 'contrast_grid_api_ping')). Exposition ponctuelle : option ['expose' => true].
+    # (ex. new Get(name: 'colorally_api_ping')). Exposition ponctuelle : option ['expose' => true].
     routes:
         - 'common_api_*'
-        - 'contrast_grid_api_*'
+        - 'colorally_api_*'

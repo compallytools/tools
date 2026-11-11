@@ -6,7 +6,7 @@ argument-hint: <NomModule> [libellé]
 
 # Ajouter un module vierge
 
-Crée un module minimal mais complet : une page d'accueil servie sur son propre host, une entrée Vite avec sa feuille de style, un lien dans la navigation et un test. Modèle de référence : `symfony/src/Demo/` (contrôleur) et `symfony/src/ContrastGrid/` (entrée Vite).
+Crée un module minimal mais complet : une page d'accueil servie sur son propre host, une entrée Vite avec sa feuille de style, un lien dans la navigation et un test. Modèle de référence : `symfony/src/Colorally/`.
 
 Architecture : `doc/docs/dev/architecture.md`. Règles du projet : `AGENTS.md` et `symfony/AGENTS.md` (tout passe par `task`, jamais `php`/`composer`/`npm` sur l'hôte ; ne pas committer sauf demande).
 
@@ -62,10 +62,7 @@ Lire chaque fichier avant de le modifier et ajouter à la suite des blocs exista
    ```
 4. `symfony/vite.config.ts` : dans `input`, `__snake__: './src/__MODULE__/Resources/assets/__kebab__.ts',` ; dans `resolve.alias`, `'@__kebab__': fromRoot('./src/__MODULE__/Resources/assets'),`.
 5. `symfony/tsconfig.json`, dans `compilerOptions.paths` : `"@__kebab__/*": ["./src/__MODULE__/Resources/assets/*"],`.
-6. `symfony/src/Common/Resources/templates/base.html.twig`, dans `<nav class="main-nav">` :
-   ```twig
-   <a href="{{ path('__snake___index') }}">__LABEL__</a>
-   ```
+6. *(plus de lien de navigation à ajouter)* : le header global de `base.html.twig` expose un bloc `brand` que le module surcharge dans son `index.html.twig` (logo, baseline).
 7. `symfony/tests/Common/Controller/DevControllerTest.php`, dans `testListsModulesInDev` :
    ```php
    self::assertSelectorExists('a[href*="__kebab__.localhost"]');

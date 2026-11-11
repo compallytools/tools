@@ -28,6 +28,6 @@ return static function (ContainerBuilder $container): void {
         $hosts[$module] = $host;
     }
 
-    // Tous les hosts, par module (ex. ['contrast_grid' => 'contrast-grid.localhost']).
+    // Tous les hosts, par module (ex. ['colorally' => 'colorally.localhost']).
     $container->setParameter('modules.hosts', $hosts);
 };

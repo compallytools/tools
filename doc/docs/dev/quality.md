@@ -22,11 +22,12 @@ Tout se lance via Task, dans les conteneurs. Les tâches sont regroupées dans l
 
 | Commande | Outil |
 |---|---|
-| `task quality:js` | eslint + stylelint + prettier + typecheck |
+| `task quality:js` | eslint + stylelint + prettier + typecheck + vitest |
 | `task quality:js:eslint` | ESLint : TS + Vue (`eslint.config.js`) |
 | `task quality:js:stylelint` | Stylelint : SCSS + `<style>` Vue, classes BEM (`.stylelintrc.json`) |
 | `task quality:js:prettier` | Formatage Prettier (`.prettierrc.json`) |
 | `task quality:js:typecheck` | vue-tsc (`tsconfig.json`, routes UX Router typées) |
+| `task quality:js:vitest` | Tests unitaires Vitest (`vitest.config.ts`, fichiers `*.test.ts` à côté du code, jsdom, `@vue/test-utils`). En continu : `task npm -- run test:watch` |
 | `task quality:js:fix` | eslint --fix, stylelint --fix, prettier --write |
 
 Les arguments passent après `--`, par exemple `task quality:php:phpcs -- src/Common`.
