@@ -1,0 +1,44 @@
+version: '3'
+
+# Point d'entrée. Les tâches sont réparties par domaine dans taskfiles/ :
+#   docker.yml  (sans préfixe) : up, down, restart, build, ps, logs, sh
+#   cli.yml     (sans préfixe) : php, composer, console, symfony, npm
+#   assets.yml  assets:*       : dev, watch, build
+#   db.yml      db:*           : diff, migrate
+#   test.yml    test           : phpunit
+#   quality.yml quality:*      : php:*, js:*, fix
+#   doc.yml     doc:*          : logs, build
+
+dotenv: ['.env.local', '.env']
+
+env:
+  HOST_UID:
+    sh: id -u
+  HOST_GID:
+    sh: id -g
+
+# Variables partagées, visibles dans tous les Taskfiles inclus
+vars:
+  DC: docker compose
+  EXEC: docker compose exec php
+  RUN_NODE: docker compose run --rm --no-deps node
+
+includes:
+  docker:
+    taskfile: ./taskfiles/docker.yml
+    flatten: true
+  cli:
+    taskfile: ./taskfiles/cli.yml
+    flatten: true
+  assets: ./taskfiles/assets.yml
+  db: ./taskfiles/db.yml
+  test: ./taskfiles/test.yml
+  quality: ./taskfiles/quality.yml
+  doc: ./taskfiles/doc.yml
+
+tasks:
+  default:
+    desc: Liste les tâches disponibles
+    cmds:
+      - task --list
+    silent: true

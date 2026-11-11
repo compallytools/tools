@@ -1,0 +1,18 @@
+# Extensions chargées automatiquement par phpstan/extension-installer :
+# symfony, doctrine, phpunit, strict-rules.
+parameters:
+    level: max
+    paths:
+        - src
+        - tests
+    excludePaths:
+        - tests/bootstrap.php
+    tmpDir: var/cache/phpstan
+
+    symfony:
+        # container compilé du cache dev (task quality:php:phpstan fait un cache:warmup)
+        containerXmlPath: var/cache/dev/App_KernelDevDebugContainer.xml
+        consoleApplicationLoader: tools/phpstan/console-application.php
+
+    doctrine:
+        objectManagerLoader: tools/phpstan/object-manager.php

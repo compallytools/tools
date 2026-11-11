@@ -1,0 +1,30 @@
+api_platform:
+    title: Tools API
+    version: 1.0.0
+
+    # Ressources découvertes par module : src/<Module>/ApiResource (DTO) et src/<Module>/Entity
+    mapping:
+        paths:
+            - '%kernel.project_dir%/src/Common/ApiResource'
+            - '%kernel.project_dir%/src/Common/Entity'
+            - '%kernel.project_dir%/src/ContrastGrid/ApiResource'
+            - '%kernel.project_dir%/src/ContrastGrid/Entity'
+
+    formats:
+        jsonld: ['application/ld+json']
+        json: ['application/json']
+
+    defaults:
+        # API consommée uniquement par le front de l'app, authentifiée par la session PHP (cookie) :
+        # pas de JWT/OAuth, pas de CORS (même origine).
+        stateless: false
+        cache_headers:
+            vary: ['Content-Type', 'Accept', 'Cookie']
+
+when@prod:
+    api_platform:
+        # Pas de documentation publique en prod
+        enable_swagger_ui: false
+        enable_re_doc: false
+        enable_docs: false
+        enable_entrypoint: false

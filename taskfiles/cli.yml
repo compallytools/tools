@@ -1,0 +1,29 @@
+version: '3'
+
+# Passe-plats vers les outils en ligne de commande (inclus sans préfixe : task composer -- …)
+
+tasks:
+  php:
+    desc: Exécute php (ex. task php -- -v)
+    cmds:
+      - '{{.EXEC}} php {{.CLI_ARGS}}'
+
+  composer:
+    desc: Exécute composer (ex. task composer -- require foo/bar)
+    cmds:
+      - '{{.EXEC}} composer {{.CLI_ARGS}}'
+
+  console:
+    desc: Exécute bin/console (ex. task console -- about)
+    cmds:
+      - '{{.EXEC}} php bin/console {{.CLI_ARGS}}'
+
+  symfony:
+    desc: Exécute la CLI Symfony (ex. task symfony -- version)
+    cmds:
+      - '{{.EXEC}} symfony {{.CLI_ARGS}}'
+
+  npm:
+    desc: Exécute npm dans un container node éphémère (ex. task npm -- install -D foo)
+    cmds:
+      - '{{.RUN_NODE}} npm {{.CLI_ARGS}}'

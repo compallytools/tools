@@ -1,0 +1,72 @@
+@use 'variables' as *;
+@use 'fonts';
+@use 'root';
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: $font-body;
+    font-size: $font-size-body;
+    line-height: $line-height-body;
+    color: $color-text;
+    background: $color-surface;
+}
+
+h1,
+h2,
+h3 {
+    font-weight: 400;
+}
+
+h1 {
+    font-family: $font-heading;
+    font-size: $font-size-h1;
+    color: $color-heading-primary;
+}
+
+h2 {
+    font-family: $font-heading;
+    font-size: $font-size-h2;
+    color: $color-heading-secondary;
+}
+
+h3 {
+    font-weight: 700;
+    font-size: $font-size-h3;
+}
+
+a {
+    color: $color-accent;
+}
+
+.main-nav {
+    display: flex;
+    gap: $spacing;
+    padding: $spacing;
+    border-bottom: 1px solid $color-border;
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: $spacing;
+}
+
+.page-header__subtitle {
+    color: $color-muted;
+}
+
+.card {
+    padding: $spacing;
+    border: 1px solid $color-border;
+    border-radius: $radius;
+
+    &__title {
+        margin-top: 0;
+    }
+}

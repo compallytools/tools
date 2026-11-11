@@ -1,0 +1,49 @@
+version: '3'
+
+# Cycle de vie de l'environnement Docker (inclus sans préfixe : task up, task down…)
+
+tasks:
+  build:
+    desc: Build les images Docker
+    cmds:
+      - '{{.DC}} build {{.CLI_ARGS}}'
+
+  up:
+    desc: Démarre les containers (php, database, node/Vite, doc) ; installe les dépendances si absentes
+    cmds:
+      # php et database d'abord : composer/npm ont besoin de vendor/ avant de lancer Vite (node).
+      - '{{.DC}} up -d --wait php database'
+      - '[ -d symfony/vendor ] || {{.DC}} exec -T php composer install'
+      - '[ -d symfony/node_modules ] || {{.DC}} run --rm --no-deps node npm install'
+      - '[ -f symfony/var/routes/index.js ] || {{.DC}} exec -T php bin/console ux:router:warm-cache'
+      - '{{.DC}} up -d --wait'
+      - 'echo "Modules : http://localhost:${HTTP_PORT}"'
+      - 'echo "Vite : http://localhost:${VITE_PORT}"'
+      - 'echo "Doc : http://localhost:${DOC_PORT}"'
+
+  down:
+    desc: Stoppe les containers
+    cmds:
+      - '{{.DC}} down {{.CLI_ARGS}}'
+
+  restart:
+    desc: Redémarre les containers
+    cmds:
+      - task: down
+      - task: up
+
+  ps:
+    desc: État des containers
+    cmds:
+      - '{{.DC}} ps'
+
+  logs:
+    desc: Logs des containers (ex. task logs -- php)
+    cmds:
+      - '{{.DC}} logs -f {{.CLI_ARGS}}'
+
+  sh:
+    desc: Shell dans le container php
+    interactive: true
+    cmds:
+      - '{{.EXEC}} bash'

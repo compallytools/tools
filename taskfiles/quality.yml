@@ -1,0 +1,100 @@
+version: '3'
+
+# Inclus depuis Taskfile.yml sous le namespace "quality" :
+#   task quality            → tout (PHP + JS + tests)
+#   task quality:php        → phpcs + phpstan + psalm
+#   task quality:js         → eslint + stylelint + prettier + typecheck
+#   task quality:fix        → corrections automatiques PHP + JS
+
+vars:
+  # Les vars des Taskfiles inclus sont globales : nom propre à ce fichier pour ne pas écraser RUN_NODE.
+  # Container éphémère sans TTY (-T) : fonctionne quel que soit le mode assets et en CI.
+  RUN_NODE_QA: docker compose run --rm --no-deps -T node
+
+tasks:
+  default:
+    desc: Toute la qualité (PHP + JS) et les tests
+    cmds:
+      - task: php
+      - task: js
+      - task: :test
+
+  fix:
+    desc: Corrections automatiques PHP + JS
+    cmds:
+      - task: php:fix
+      - task: js:fix
+
+  # --- PHP -------------------------------------------------------------------
+  php:
+    desc: Qualité PHP (phpcs + phpstan + psalm)
+    cmds:
+      - task: php:phpcs
+      - task: php:phpstan
+      - task: php:psalm
+
+  php:phpcs:
+    desc: Style PHP, PSR-12 + Slevomat (ex. task quality:php:phpcs -- src/Common)
+    cmds:
+      - '{{.EXEC}} vendor/bin/phpcs {{.CLI_ARGS}}'
+
+  php:phpcbf:
+    desc: Corrige le style PHP
+    cmds:
+      # phpcbf retourne 1 quand il a corrigé des fichiers
+      - '{{.EXEC}} vendor/bin/phpcbf {{.CLI_ARGS}} || [ $? -eq 1 ]'
+
+  php:psalm:
+    desc: Analyse statique PHP (Psalm)
+    cmds:
+      # le plugin Symfony lit le container compilé du cache dev
+      - '{{.EXEC}} php bin/console cache:warmup --env=dev -q'
+      - '{{.EXEC}} vendor/bin/psalm --no-progress {{.CLI_ARGS}}'
+
+  php:phpstan:
+    desc: Analyse statique PHP (PHPStan niveau max + symfony/doctrine/phpunit/strict-rules)
+    cmds:
+      # les extensions Symfony/Doctrine lisent le container compilé du cache dev
+      - '{{.EXEC}} php bin/console cache:warmup --env=dev -q'
+      - '{{.EXEC}} vendor/bin/phpstan analyse --no-progress --memory-limit=1G {{.CLI_ARGS}}'
+
+  php:fix:
+    desc: Corrections automatiques PHP (phpcbf)
+    cmds:
+      - task: php:phpcbf
+
+  # --- JS / TS / Vue / SCSS ----------------------------------------------------
+  js:
+    desc: Qualité front (eslint + stylelint + prettier + typecheck)
+    cmds:
+      - task: js:eslint
+      - task: js:stylelint
+      - task: js:prettier
+      - task: js:typecheck
+
+  js:eslint:
+    desc: ESLint (TS + Vue)
+    cmds:
+      - '{{.RUN_NODE_QA}} npm run -s lint'
+
+  js:stylelint:
+    desc: Stylelint (SCSS + <style> Vue)
+    cmds:
+      - '{{.RUN_NODE_QA}} npm run -s lint:style'
+
+  js:prettier:
+    desc: Vérifie le formatage Prettier
+    cmds:
+      - '{{.RUN_NODE_QA}} npm run -s format:check'
+
+  js:typecheck:
+    desc: Vérification des types TS/Vue (vue-tsc)
+    cmds:
+      - '{{.RUN_NODE_QA}} npm run -s typecheck'
+
+  js:fix:
+    desc: Corrections automatiques front (eslint --fix, stylelint --fix, prettier --write)
+    cmds:
+      - '{{.RUN_NODE_QA}} npm run -s lint:fix'
+      - '{{.RUN_NODE_QA}} npm run -s lint:style:fix'
+      - '{{.RUN_NODE_QA}} npm run -s format'

@@ -1,0 +1,11 @@
+twig:
+    file_name_pattern: '*.twig'
+    # Un namespace Twig par module : @Common/..., @ContrastGrid/...
+    paths:
+        '%kernel.project_dir%/src/Common/Resources/templates': Common
+        '%kernel.project_dir%/src/ContrastGrid/Resources/templates': ContrastGrid
+        '%kernel.project_dir%/src/Demo/Resources/templates': Demo
+
+when@test:
+    twig:
+        strict_variables: true

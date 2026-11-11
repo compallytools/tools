@@ -1,0 +1,19 @@
+{% extends '@Common/base.html.twig' %}
+
+{% block title %}Contrast Grid · {{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ reprise_entry_link_tags('contrast_grid') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ reprise_entry_script_tags('contrast_grid') }}
+{% endblock %}
+
+{% block body %}
+    <twig:PageHeader title="Contrast Grid" />
+
+    <div {{ vue_component('ContrastGrid/ContrastGrid', {title: 'Contrast Grid'}) }}></div>
+{% endblock %}

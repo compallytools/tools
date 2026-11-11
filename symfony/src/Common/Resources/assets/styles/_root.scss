@@ -1,0 +1,8 @@
+// Palette exposée en custom properties (--color-<nom>) pour les composants Vue, le JS ou le CSS sans @use.
+@use 'variables' as *;
+
+:root {
+    @each $name, $value in $palette {
+        --color-#{$name}: #{$value};
+    }
+}

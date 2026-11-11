@@ -1,0 +1,5 @@
+.env.local
+/doc/site/
+.DS_Store
+.idea/
+.vscode/

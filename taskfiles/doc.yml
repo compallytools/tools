@@ -1,0 +1,14 @@
+version: '3'
+
+# Documentation Zensical (servie automatiquement par task up sur http://localhost:$DOC_PORT)
+
+tasks:
+  logs:
+    desc: Logs du serveur de doc
+    cmds:
+      - '{{.DC}} logs -f doc'
+
+  build:
+    desc: Génère la doc statique dans doc/site
+    cmds:
+      - '{{.DC}} run --rm --no-deps doc zensical build --clean'

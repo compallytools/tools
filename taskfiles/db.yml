@@ -1,0 +1,14 @@
+version: '3'
+
+# Base de données (Doctrine)
+
+tasks:
+  diff:
+    desc: Génère une migration Doctrine à partir des entités
+    cmds:
+      - '{{.EXEC}} php bin/console doctrine:migrations:diff --no-interaction'
+
+  migrate:
+    desc: Applique les migrations Doctrine
+    cmds:
+      - '{{.EXEC}} php bin/console doctrine:migrations:migrate --no-interaction --allow-no-migration'

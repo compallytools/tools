@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+        "target": "ES2022",
+        "module": "ESNext",
+        "moduleResolution": "Bundler",
+        "lib": ["ES2022", "DOM", "DOM.Iterable"],
+        "types": ["vite/client", "node"],
+        "strict": true,
+        "noUncheckedIndexedAccess": true,
+        "noImplicitOverride": true,
+        "noFallthroughCasesInSwitch": true,
+        "isolatedModules": true,
+        "verbatimModuleSyntax": true,
+        "skipLibCheck": true,
+        "allowJs": true,
+        "noEmit": true,
+        "jsx": "preserve",
+        "paths": {
+            "@common/*": ["./src/Common/Resources/assets/*"],
+            "@contrast-grid/*": ["./src/ContrastGrid/Resources/assets/*"],
+            "@router": ["./assets/router.ts"]
+        }
+    },
+    "include": [
+        "src/**/Resources/assets/**/*.ts",
+        "src/**/Resources/assets/**/*.vue",
+        "assets/**/*.ts",
+        "var/routes/*.d.ts",
+        "*.config.ts"
+    ],
+    "exclude": ["node_modules", "vendor", "public"]
+}

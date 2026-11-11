@@ -1,0 +1,29 @@
+version: '3'
+
+# Assets (Symfony Reprise + Vite). Trois modes exclusifs : ils écrivent tous public/build/entrypoints.json.
+#   assets:dev   → serveur Vite + HMR (service "node", lancé par défaut par task up)
+#   assets:watch → build de dev en continu dans public/build, sans serveur Vite
+#   assets:build → build de prod dans public/build
+
+tasks:
+  dev:
+    desc: Serveur Vite avec HMR (mode par défaut de task up) et suivi des logs
+    cmds:
+      - '{{.DC}} up -d node'
+      - 'echo "Vite : http://localhost:${VITE_PORT} (Ctrl+C quitte les logs, le serveur continue)"'
+      - '{{.DC}} logs -f --tail 20 node'
+
+  watch:
+    desc: Build en continu (vite build --watch), sans serveur Vite (Ctrl+C pour arrêter)
+    interactive: true
+    cmds:
+      - '{{.DC}} stop node'
+      - defer: 'echo "Watch arrêté. task assets:dev pour revenir au serveur Vite."'
+      - '{{.RUN_NODE}} npm run watch'
+
+  build:
+    desc: Build de production dans public/build (arrête le serveur Vite)
+    cmds:
+      - '{{.DC}} stop node'
+      - '{{.RUN_NODE}} npm run build'
+      - 'echo "Assets de prod dans symfony/public/build. task assets:dev pour revenir au serveur Vite."'

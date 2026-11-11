@@ -1,0 +1,9 @@
+{% extends '@Common/base.html.twig' %}
+
+{% block title %}Demo · {{ parent() }}{% endblock %}
+
+{% block body %}
+    <twig:PageHeader title="Demo" />
+
+    <p>Module Demo, servi sur {{ app.request.host }}.</p>
+{% endblock %}

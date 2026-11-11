@@ -1,0 +1,13 @@
+{% extends '@Common/base.html.twig' %}
+
+{% block title %}Modules · {{ parent() }}{% endblock %}
+
+{% block body %}
+    <twig:PageHeader title="Modules" subtitle="Page visible uniquement en environnement dev." />
+
+    <ul>
+        {% for module in modules %}
+            <li><a href="{{ module.url }}">{{ module.name }}</a> — {{ module.host }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

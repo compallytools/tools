@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../vendor/symfony/dependency-injection/Loader/schema/services.schema.json
+
+imports:
+    # Paramètres <module>.host issus de config/modules.yaml (utilisés par routes.yaml).
+    - { resource: hosts.php }
+
+parameters:
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    # Tous les modules (src/<Module>/) sont des services, hors entités et ressources.
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/Kernel.php'
+            - '../src/*/Entity/'
+            - '../src/*/Resources/'

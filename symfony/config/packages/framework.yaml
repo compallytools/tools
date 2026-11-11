@@ -1,0 +1,20 @@
+# see https://symfony.com/doc/current/reference/configuration/framework.html
+framework:
+    secret: '%env(APP_SECRET)%'
+
+    # Note that the session will be started ONLY if you read or write from it.
+    # Session PHP : utilisée par les pages ET par l'API (API Platform).
+    # SameSite=lax + API JSON uniquement (415 sur les autres Content-Type) => pas de CSRF cross-site.
+    session:
+        cookie_secure: auto
+        cookie_samesite: lax
+        cookie_httponly: true
+
+    #esi: true
+    #fragments: true
+
+when@test:
+    framework:
+        test: true
+        session:
+            storage_factory_id: session.storage.factory.mock_file

@@ -1,0 +1,12 @@
+<article {{ attributes.defaults({class: 'card'}) }}>
+    <h2 class="card__title">
+        {% if this.hasLink %}
+            <a href="{{ href }}">{{ title }}</a>
+        {% else %}
+            {{ title }}
+        {% endif %}
+    </h2>
+    <div class="card__content">
+        {% block content %}{% endblock %}
+    </div>
+</article>

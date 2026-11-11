@@ -1,0 +1,8 @@
+# Host de chaque module (routes.yaml : host: '%<module>.host%').
+# Surcharge par environnement : variable <MODULE>_HOST (ex. CONTRAST_GRID_HOST=contrast-grid.prp.tld.com),
+# puis cache:warmup. Lu par config/hosts.php.
+contrast_grid:
+    host: contrast-grid.localhost
+
+demo:
+    host: demo.localhost

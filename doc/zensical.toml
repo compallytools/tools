@@ -1,0 +1,17 @@
+[project]
+site_name = "Tools"
+site_description = "Documentation du projet"
+docs_dir = "docs"
+site_dir = "site"
+nav = [
+  { "Accueil" = "index.md" },
+  { "Développement" = [
+    { "Démarrage" = "dev/getting-started.md" },
+    { "Architecture" = "dev/architecture.md" },
+    { "Qualité" = "dev/quality.md" },
+  ] },
+]
+
+[project.theme]
+language = "fr"
+features = ["navigation.instant", "content.code.copy"]

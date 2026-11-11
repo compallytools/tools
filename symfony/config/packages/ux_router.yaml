@@ -1,0 +1,10 @@
+ux_router:
+    # Routes dumpées ici (import dans assets/router.ts)
+    dump_directory: '%kernel.project_dir%/var/routes'
+    dump_typescript: true
+
+    # Routes exposées au JS : les opérations API Platform des modules, nommées <module>_api_*
+    # (ex. new Get(name: 'contrast_grid_api_ping')). Exposition ponctuelle : option ['expose' => true].
+    routes:
+        - 'common_api_*'
+        - 'contrast_grid_api_*'

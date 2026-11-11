@@ -1,0 +1,26 @@
+# Routes chargées par module : chaque module importe ses contrôleurs (attributs #[Route]).
+# Convention : host (config/modules.yaml, paramètre <module>.host)
+# et préfixe de nom de route propres au module ; chaque module a son propre "/".
+# Lister les routes : task console -- debug:router
+
+contrast_grid:
+    resource: ../src/ContrastGrid/Controller/
+    type: attribute
+    host: '%contrast_grid.host%'
+    name_prefix: contrast_grid_
+
+demo:
+    resource: ../src/Demo/Controller/
+    type: attribute
+    host: '%demo.host%'
+    name_prefix: demo_
+
+# Page d'accueil de dev (liste des modules), hors modules : host localhost, jamais en prod.
+when@dev: &dev_routes
+    common_dev:
+        resource: ../src/Common/Controller/
+        type: attribute
+        host: localhost
+        name_prefix: common_
+
+when@test: *dev_routes

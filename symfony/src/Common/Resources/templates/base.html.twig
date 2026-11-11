@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}Tools{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        {% block stylesheets %}
+            {{ reprise_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ reprise_entry_script_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
+        <nav class="main-nav">
+            <a href="{{ path('contrast_grid_index') }}">Contrast Grid</a>
+            <a href="{{ path('demo_index') }}">Demo</a>
+        </nav>
+        <main class="container">
+            {% block body %}{% endblock %}
+        </main>
+    </body>
+</html>

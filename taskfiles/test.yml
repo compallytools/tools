@@ -1,0 +1,9 @@
+version: '3'
+
+# Tests
+
+tasks:
+  default:
+    desc: Tests PHPUnit (ex. task test -- --filter Home)
+    cmds:
+      - '{{.EXEC}} bin/phpunit {{.CLI_ARGS}}'
