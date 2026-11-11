@@ -81,13 +81,16 @@ L'API (`/api`) sert **uniquement le front de l'application**. Elle est authentif
 
 ## Créer un module
 
-1. Dossiers `src/<Module>/{Controller,ApiResource,State,Entity,Repository,Twig/Components,Resources/{templates,assets}}`.
+Le plus simple : le skill `/add-module <NomModule>` (`.claude/skills/add-module/`) crée un module vierge et fait les étapes 1, 2, 5, 7 et 8 ci-dessous. Étapes à la main :
+
+1. Dossiers `src/<Module>/{Controller,ApiResource,State,Entity,Repository,Twig/Components,Resources/{templates,assets}}` (seuls ceux utiles sont à créer).
 2. `config/routes.yaml` : import `../src/<Module>/Controller/` avec `host: '%<module_snake>.host%'` et `name_prefix` ; déclarer le module et son host par défaut dans `symfony/config/modules.yaml` (surcharge par environnement : variable `<MODULE>_HOST`, cache à réchauffer).
-3. `config/packages/api_platform.yaml` : ajouter `src/<Module>/ApiResource` et `src/<Module>/Entity` aux `mapping.paths` ; `config/packages/ux_router.yaml` : ajouter `<module>_api_*`.
-4. `config/packages/doctrine.yaml` : mapping `<Module>`.
+3. `config/packages/api_platform.yaml` : ajouter `src/<Module>/ApiResource` et `src/<Module>/Entity` aux `mapping.paths` ; `config/packages/ux_router.yaml` : ajouter `<module>_api_*`. *(optionnel : seulement si le module expose une API)*
+4. `config/packages/doctrine.yaml` : mapping `<Module>`. *(optionnel : entités)*
 5. `config/packages/twig.yaml` : path `src/<Module>/Resources/templates: <Module>`.
-6. `config/packages/twig_component.yaml` : `App\<Module>\Twig\Components\` avec `name_prefix`.
-7. `vite.config.ts` (entrée + alias) et `tsconfig.json` (alias).
-8. `tests/<Module>/` pour les tests.
+6. `config/packages/twig_component.yaml` : `App\<Module>\Twig\Components\` avec `name_prefix`. *(optionnel : composants Twig PHP)*
+7. `vite.config.ts` (entrée + alias) et `tsconfig.json` (alias), `Resources/assets/<module-kebab>.ts`, et dans le template les blocs `stylesheets` / `javascripts` avec `reprise_entry_*_tags('<module_snake>')`.
+8. Lien dans la navigation (`base.html.twig`), assertion du lien dans `tests/Common/Controller/DevControllerTest.php`, lignes dans `README.md` et dans le tableau des modules ci-dessus.
+9. `tests/<Module>/` pour les tests.
 
 Les ressources API Platform d'un module (`App\<Module>\…`) héritent implicitement du host du module (`ModuleHostResourceMetadataCollectionFactory`) : l'API n'est servie que sur le host du module.

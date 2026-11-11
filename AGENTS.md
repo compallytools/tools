@@ -28,8 +28,9 @@ doc/                # documentation Zensical (voir doc/AGENTS.md)
   - Node/npm tourne dans le container `node` : `task npm -- <cmd>`.
 - **Lancer `task quality` avant de rendre la main** (phpcs, phpstan, psalm, eslint, stylelint, prettier, vue-tsc, phpunit). `task quality:fix` corrige ce qui peut l’être. Sous-ensembles : `quality:php`, `quality:js`, `quality:php:psalm`, etc.
 - Architecture modulaire (`symfony/src/<Module>/`) : voir `doc/docs/dev/architecture.md`.
+- Skills du projet : `.claude/skills/` (voir son `README.md`). Ajouter un module : `/add-module <NomModule>`.
 - Lister les tâches : `task` (ou `task --list`).
-- Démarrer / arrêter l'env : `task up` / `task down`.
+- Démarrer / arrêter l'env : `task up` / `task down`. Installer les dépendances (composer, npm, routes JS) : `task install` (clone frais, ou après un changement de `composer.lock` / `package-lock.json`).
 - Une nouvelle commande récurrente → l'ajouter avec une `desc` dans le Taskfile de son domaine (`taskfiles/<domaine>.yml`), pas dans `Taskfile.yml`, qui ne fait qu'inclure. Nommage hiérarchique `<namespace>:<domaine>:<outil>` (ex. `quality:php:phpcs`). Les vars déclarées dans un Taskfile inclus sont globales : leur donner un nom propre au fichier, sinon elles écrasent celles des autres.
 - Un changement d'environnement (service, port, commande) → mettre à jour `doc/docs/dev/getting-started.md`.
 - Ne pas versionner de secrets ; les valeurs de `.env` sont des valeurs de dev uniquement.

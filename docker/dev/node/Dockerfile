@@ -13,4 +13,5 @@ USER node
 WORKDIR /app
 
 EXPOSE 5173
-CMD ["sh", "-c", "[ -d node_modules ] || npm install; npm run dev"]
+# Attend la fin de task install (npm install + routes JS) avant de lancer Vite, qui planterait sinon.
+CMD ["sh", "-c", "until [ -f node_modules/.package-lock.json ] && [ -f var/routes/index.js ]; do echo 'En attente de task install…'; sleep 2; done; npm run dev"]

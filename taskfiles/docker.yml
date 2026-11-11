@@ -9,13 +9,8 @@ tasks:
       - '{{.DC}} build {{.CLI_ARGS}}'
 
   up:
-    desc: Démarre les containers (php, database, node/Vite, doc) ; installe les dépendances si absentes
+    desc: Démarre les containers (php, database, node/Vite, doc). Sur un clone frais, enchaîner avec task install
     cmds:
-      # php et database d'abord : composer/npm ont besoin de vendor/ avant de lancer Vite (node).
-      - '{{.DC}} up -d --wait php database'
-      - '[ -d symfony/vendor ] || {{.DC}} exec -T php composer install'
-      - '[ -d symfony/node_modules ] || {{.DC}} run --rm --no-deps node npm install'
-      - '[ -f symfony/var/routes/index.js ] || {{.DC}} exec -T php bin/console ux:router:warm-cache'
       - '{{.DC}} up -d --wait'
       - 'echo "Modules : http://localhost:${HTTP_PORT}"'
       - 'echo "Vite : http://localhost:${VITE_PORT}"'

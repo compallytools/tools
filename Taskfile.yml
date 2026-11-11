@@ -3,6 +3,7 @@ version: '3'
 # Point d'entrée. Les tâches sont réparties par domaine dans taskfiles/ :
 #   docker.yml  (sans préfixe) : up, down, restart, build, ps, logs, sh
 #   cli.yml     (sans préfixe) : php, composer, console, symfony, npm
+#   install.yml (sans préfixe) : install (composer + npm + routes JS)
 #   assets.yml  assets:*       : dev, watch, build
 #   db.yml      db:*           : diff, migrate
 #   test.yml    test           : phpunit
@@ -29,6 +30,9 @@ includes:
     flatten: true
   cli:
     taskfile: ./taskfiles/cli.yml
+    flatten: true
+  install:
+    taskfile: ./taskfiles/install.yml
     flatten: true
   assets: ./taskfiles/assets.yml
   db: ./taskfiles/db.yml

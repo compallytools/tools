@@ -1,0 +1,16 @@
+version: '3'
+
+# Installation des dépendances et données du projet (inclus sans préfixe : task install).
+# Nécessite l'environnement démarré (task up). Idempotent : peut être relancé après un git pull.
+
+tasks:
+  install:
+    desc: Installe le projet (composer, npm, routes JS) ; à lancer après task up, et après chaque changement de dépendances
+    cmds:
+      - task: composer
+        vars: {CLI_ARGS: install}
+      - task: npm
+        vars: {CLI_ARGS: install}
+      - task: console
+        vars: {CLI_ARGS: ux:router:warm-cache}
+      # Plus tard si besoin : migrations (task db:migrate), fixtures…
